@@ -1,0 +1,86 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+
+\pagestyle{fancy}
+
+
+\newenvironment{problem}[2][Problem]
+    { \begin{mdframed}[backgroundcolor=white!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}{\textbf{Solution}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{Nguyen Thi Thuy Duong}
+\rhead{DSEB 61} 
+\chead{\textbf{HOMEWORK WEEK 3 }}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\begin{problem}{1}
+Transform linear regression by Latex, from $ t = y(x,w) + noise \Rightarrow w = (X^{T}X)^{-1}X^{T}t$  
+\end{problem}
+\begin{solution} \newline
+We have: 
+$$t = y(x,w) + noise = N(y(x,w), \beta ^{-1})$$
+$$\Rightarrow p(t|x,w,\beta) = N(t|y(x,w), \beta ^{-1})$$
+The ~likelihood ~function:
+ $$p(t|x,w,\beta) = \prod_{n=1}^{N} N(t_{n}|y(x_{n},w), \beta ^{-1})$$ 
+It is convenient to maximize the logarithm of the likelihood function
+$$ log~ p(t|x,w,\beta)= \sum_{n=1}^{N} log~(N(t_{n}|y(x_{n},w), \beta^{-1}))$$ 
+$$= \frac{-\beta}{2} \sum_{n=1}^{N} (y(x_{n},w) - (t_{n})^2) + \frac{N}{2} log~\beta - \frac{N}{2} log (2 \pi) $$
+$$max~ log~p(t|x,w,\beta) = - max~ \frac{-\beta}{2} \sum_{n=1}^{N} (y(x_{n},w) - (t_{n})^2) $$
+$$= min~ \frac{1}{2} \sum_{n=1}^{N} (y(x_{n},w) - (t_{n})^2)$$ 
+We~ minimize~ $P = \frac{1}{2} \sum_{n=1}^{N} (y(x_{n},w) - (t_{n})^2)$ to~ find~ w. 
+Suppose: 
+$$X = \begin{bmatrix}
+1 & x_{1} \\ 
+2 & x_{2}\\ 
+. & . \\ 
+. & .\\ 
+. & .\\
+1 & x_{n}
+\end{bmatrix},
+w = \begin{bmatrix}
+w_{0} \\ w_{1} 
+\end{bmatrix} $$
+$$\Rightarrow P = \left \| Xw - t \right \|^{2}_{2}$$
+$$\bigtriangledown P_{w} = X^{T}(Xw - t) = X^{T}Xw - X^{T}t $$
+Setting this gradient to zero, we have: \newline
+$$ X^{T}Xw - X^{T}t = 0 $$
+$$\Leftrightarrow w = (X^{T}X)^{-1} X^{T}t $$
+\end{solution}
+    
+\begin{problem}{2}
+Prove that $X^{T}X$ is invertible when X is full rank 
+\end{problem}
+\begin{solution}\newline
+We have :
+Suppose  $X^{T}v=0$ . \newline
+Then, of course,  $XX^{T}v=0$  too. \newline
+ Conversely, suppose  $XX^{T}v=0$ .\newline
+ Then  $v^{T}XX^{T}v=0$ , so that  $(X^{T}v)^{T}(X^{T}v)=0 $.\newline 
+ This implies  $X^{T}v=0$ .\newline
+Hence, we have proved that  $X^{T}v=0$  if and only if  v  is in the nullspace of  $X^{T}X$.\newline
+But  $X^{T}v=0$  and  $v\neq0$  if and only if  X  has linearly dependent rows. \newline
+Thus,  $X^{T}X$ is invertible if and only if  X  has full row rank.\newline
+    \end{solution}
+\end{document}

@@ -63,7 +63,7 @@ w = \begin{bmatrix}
 w_{0} \\ w_{1} 
 \end{bmatrix} $$
 $$\Rightarrow P = \left \| Xw - t \right \|^{2}_{2}$$
-$$\bigtriangledown P_{w} = X^{T}(Xw - t) = X^{T}Xw - X^{T}t $$
+$$\bigtriangledown P = 2X^{T}(Xw - t) = 2X^{T}Xw - 2X^{T}t $$
 Setting this gradient to zero, we have: \newline
 $$ X^{T}Xw - X^{T}t = 0 $$
 $$\Leftrightarrow w = (X^{T}X)^{-1} X^{T}t $$
